@@ -2,7 +2,7 @@ pub mod day_6 {
     use std::{
         collections::HashMap,
         fs::File,
-        io::{BufRead, BufReader, Read},
+        io::{BufReader, Read},
         str::from_utf8,
     };
 
