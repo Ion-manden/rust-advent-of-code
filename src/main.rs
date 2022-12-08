@@ -4,6 +4,8 @@ mod day_3;
 mod day_4;
 mod day_5;
 mod day_6;
+
+mod day_8;
 mod reader;
 
 use day_1::day_1::{day_1_part_1, day_1_part_2};
@@ -12,7 +14,10 @@ use day_3::day_3::{day_3_part_1, day_3_part_2};
 use day_4::day_4::{day_4_part_1, day_4_part_2};
 use day_5::day_5::{day_5_part_1, day_5_part_2};
 use day_6::day_6::{day_6_part_1, day_6_part_2};
+
+use day_8::day_8::{day_8_part_1, day_8_part_2};
 use reader::reader::create_reader_from_file;
+
 
 fn main() {
     println!(
@@ -62,5 +67,19 @@ fn main() {
     println!(
         "Day 6 Part 2:{}",
         day_6_part_2(create_reader_from_file("./src/day_6/input.txt".to_owned()))
+    );
+
+
+
+
+
+
+    println!(
+        "Day 8 Part 1:{}",
+        day_8_part_1(create_reader_from_file("./src/day_8/input.txt".to_owned()))
+    );
+    println!(
+        "Day 8 Part 2:{}",
+        day_8_part_2(create_reader_from_file("./src/day_8/input.txt".to_owned()))
     );
 }
