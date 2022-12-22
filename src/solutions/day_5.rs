@@ -200,7 +200,7 @@ pub mod day_5 {
     fn test_day_5_part_1_example() {
         let expect = "CMZ";
         let got = day_5_part_1(create_reader_from_file(
-            "./src/day_5/example.txt".to_owned(),
+            "./src/solutions/day_5/example.txt".to_owned(),
         ));
         assert_eq!(got, expect);
     }
@@ -208,7 +208,7 @@ pub mod day_5 {
     #[test]
     fn test_day_5_part_1_input() {
         let expect = "VPCDMSLWJ";
-        let got = day_5_part_1(create_reader_from_file("./src/day_5/input.txt".to_owned()));
+        let got = day_5_part_1(create_reader_from_file("./src/solutions/day_5/input.txt".to_owned()));
         assert_eq!(got, expect);
     }
 
@@ -272,7 +272,7 @@ pub mod day_5 {
         let expect = "MCD";
 
         let got = day_5_part_2(create_reader_from_file(
-            "./src/day_5/example.txt".to_owned(),
+            "./src/solutions/day_5/example.txt".to_owned(),
         ));
 
         assert_eq!(got, expect);
@@ -282,7 +282,7 @@ pub mod day_5 {
     fn test_day_5_part_2_input() {
         let expect = "TPWCGNCCG";
 
-        let got = day_5_part_2(create_reader_from_file("./src/day_5/input.txt".to_owned()));
+        let got = day_5_part_2(create_reader_from_file("./src/solutions/day_5/input.txt".to_owned()));
 
         assert_eq!(got, expect);
     }

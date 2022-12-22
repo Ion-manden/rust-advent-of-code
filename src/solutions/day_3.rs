@@ -41,7 +41,7 @@ pub mod day_3 {
     fn test_day_3_part_1_example() {
         let expect = 157;
         let got = day_3_part_1(create_reader_from_file(
-            "./src/day_3/example.txt".to_owned(),
+            "./src/solutions/day_3/example.txt".to_owned(),
         ));
         assert_eq!(got, expect);
     }
@@ -49,7 +49,7 @@ pub mod day_3 {
     #[test]
     fn test_day_3_part_1_input() {
         let expect = 7908;
-        let got = day_3_part_1(create_reader_from_file("./src/day_3/input.txt".to_owned()));
+        let got = day_3_part_1(create_reader_from_file("./src/solutions/day_3/input.txt".to_owned()));
         assert_eq!(got, expect);
     }
 
@@ -89,7 +89,7 @@ pub mod day_3 {
         let expect = 70;
 
         let got = day_3_part_2(create_reader_from_file(
-            "./src/day_3/example.txt".to_owned(),
+            "./src/solutions/day_3/example.txt".to_owned(),
         ));
 
         assert_eq!(got, expect);
@@ -99,7 +99,7 @@ pub mod day_3 {
     fn test_day_3_part_2_input() {
         let expect = 2838;
 
-        let got = day_3_part_2(create_reader_from_file("./src/day_3/input.txt".to_owned()));
+        let got = day_3_part_2(create_reader_from_file("./src/solutions/day_3/input.txt".to_owned()));
 
         assert_eq!(got, expect);
     }
