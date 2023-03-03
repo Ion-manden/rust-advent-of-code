@@ -8,7 +8,6 @@ use crate::reader::reader::create_reader_from_file;
 
 #[derive(Clone, Debug)]
 struct ElfFolder {
-    name: String,
     parent_folder: Option<String>,
     path: String,
 }
@@ -40,7 +39,6 @@ fn create_folders_and_files_from_reader(
     reader: BufReader<File>,
 ) -> (HashMap<String, ElfFolder>, HashMap<String, ElfFile>) {
     let mut current_folder = ElfFolder {
-        name: "/".to_owned(),
         parent_folder: None,
         path: "/".to_owned(),
     };
@@ -78,7 +76,6 @@ fn create_folders_and_files_from_reader(
                 }
                 None => {
                     let folder = ElfFolder {
-                        name: dir.to_owned(),
                         parent_folder: Some(current_folder.clone().path),
                         path,
                     };
@@ -106,7 +103,6 @@ fn create_folders_and_files_from_reader(
             path.push_str(dir);
 
             let folder = ElfFolder {
-                name: dir.to_owned(),
                 parent_folder: Some(current_folder.clone().path),
                 path,
             };
