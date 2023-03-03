@@ -14,6 +14,7 @@ use solutions::day_7::day_7::{day_7_part_1, day_7_part_2};
 use solutions::day_8::day_8::{day_8_part_1, day_8_part_2};
 use solutions::day_9::day_9::{day_9_part_1, day_9_part_2};
 use solutions::day_10::day_10::{day_10_part_1, day_10_part_2};
+use solutions::day_11::day_11::{day_11_part_1, day_11_part_2};
 
 fn print_metric<T: Display>(name: String, func: fn() -> T) {
     println!("{}", name);
@@ -127,5 +128,15 @@ fn main() {
         day_10_part_2(create_reader_from_file(
             "./src/solutions/day_10/input.txt".to_owned(),
         )).len()
+    });
+    print_metric(String::from("day 11 part 1"), || {
+        day_11_part_1(create_reader_from_file(
+            "./src/solutions/day_11/input.txt".to_owned(),
+        ))
+    });
+    print_metric(String::from("day 11 part 2"), || {
+        day_11_part_2(create_reader_from_file(
+            "./src/solutions/day_11/input.txt".to_owned(),
+        ))
     });
 }
