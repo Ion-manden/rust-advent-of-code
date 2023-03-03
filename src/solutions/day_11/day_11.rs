@@ -160,7 +160,6 @@ pub fn day_11_part_1(reader: BufReader<File>) -> i64 {
 
 #[test]
 fn test_day_11_part_1_example() {
-    println!("test_day_11_part_1_example called");
     let expect = 10605;
     let got = day_11_part_1(create_reader_from_file(
         "./src/solutions/day_11/example.txt".to_owned(),
@@ -206,8 +205,6 @@ pub fn day_11_part_2(reader: BufReader<File>) -> i64 {
         .into_iter()
         .map(|m| m.inspected_item_count)
         .collect_vec();
-
-    println!("{:?}", items_inspected);
 
     items_inspected.sort();
     items_inspected.reverse();
