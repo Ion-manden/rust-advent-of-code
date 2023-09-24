@@ -5,6 +5,12 @@ use std::{fmt::Display, time::Instant};
 
 use reader::reader::create_reader_from_file;
 use solutions::day_1::day_1::{day_1_part_1, day_1_part_2};
+use solutions::day_10::day_10::{day_10_part_1, day_10_part_2};
+use solutions::day_11::day_11::{day_11_part_1, day_11_part_2};
+use solutions::day_12::day_12::{day_12_part_1, day_12_part_2};
+use solutions::day_13::day_13::{day_13_part_1, day_13_part_2};
+use solutions::day_14::day_14::{day_14_part_1, day_14_part_2};
+use solutions::day_15::day_15::{day_15_part_1, day_15_part_2};
 use solutions::day_2::day_2::{day_2_part_1, day_2_part_2};
 use solutions::day_3::day_3::{day_3_part_1, day_3_part_2};
 use solutions::day_4::day_4::{day_4_part_1, day_4_part_2};
@@ -13,9 +19,6 @@ use solutions::day_6::day_6::{day_6_part_1, day_6_part_2};
 use solutions::day_7::day_7::{day_7_part_1, day_7_part_2};
 use solutions::day_8::day_8::{day_8_part_1, day_8_part_2};
 use solutions::day_9::day_9::{day_9_part_1, day_9_part_2};
-use solutions::day_10::day_10::{day_10_part_1, day_10_part_2};
-use solutions::day_11::day_11::{day_11_part_1, day_11_part_2};
-use solutions::day_12::day_12::{day_12_part_1, day_12_part_2};
 
 fn print_metric<T: Display>(name: String, func: fn() -> T) {
     println!("{}", name);
@@ -128,7 +131,8 @@ fn main() {
     print_metric(String::from("day 10 part 2"), || {
         day_10_part_2(create_reader_from_file(
             "./src/solutions/day_10/input.txt".to_owned(),
-        )).len()
+        ))
+        .len()
     });
     print_metric(String::from("day 11 part 1"), || {
         day_11_part_1(create_reader_from_file(
@@ -148,6 +152,37 @@ fn main() {
     print_metric(String::from("day 12 part 2"), || {
         day_12_part_2(create_reader_from_file(
             "./src/solutions/day_12/input.txt".to_owned(),
+        ))
+    });
+    print_metric(String::from("day 13 part 1"), || {
+        day_13_part_1(create_reader_from_file(
+            "./src/solutions/day_13/input.txt".to_owned(),
+        ))
+    });
+    print_metric(String::from("day 13 part 2"), || {
+        day_13_part_2(create_reader_from_file(
+            "./src/solutions/day_13/input.txt".to_owned(),
+        ))
+    });
+    print_metric(String::from("day 14 part 1"), || {
+        day_14_part_1(create_reader_from_file(
+            "./src/solutions/day_14/input.txt".to_owned(),
+        ))
+    });
+    print_metric(String::from("day 14 part 2"), || {
+        day_14_part_2(create_reader_from_file(
+            "./src/solutions/day_14/input.txt".to_owned(),
+        ))
+    });
+    print_metric(String::from("day 15 part 1"), || {
+        day_15_part_1(
+            create_reader_from_file("./src/solutions/day_15/input.txt".to_owned()),
+            200_0000,
+        )
+    });
+    print_metric(String::from("day 15 part 2"), || {
+        day_15_part_2(create_reader_from_file(
+            "./src/solutions/day_15/input.txt".to_owned(),
         ))
     });
 }
