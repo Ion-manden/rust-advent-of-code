@@ -1,5 +1,6 @@
 mod reader;
 mod year_2022;
+mod year_2023;
 
 use std::{fmt::Display, time::Instant};
 
