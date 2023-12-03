@@ -74,9 +74,7 @@ fn get_points_from_sensor(sensor: &Point, max_distance: &i32) -> Vec<Point> {
 
     let min_x = sensor.x - *max_distance;
     let max_x = sensor.x + *max_distance;
-    for x in min_x..=max_x {
-
-    }
+    for x in min_x..=max_x {}
 
     checked_points
 }

@@ -185,7 +185,7 @@ pub fn day_11_part_2(reader: BufReader<File>) -> i64 {
         for monkey_index in 0..monkeys.len() {
             for item in monkeys[monkey_index].items.clone() {
                 // We mod the worry level by the divider to not get int overflows
-                let new_worry_level = monkeys[monkey_index].inspect(&item) % common_divider ;
+                let new_worry_level = monkeys[monkey_index].inspect(&item) % common_divider;
 
                 if new_worry_level % monkeys[monkey_index].test_divisible_by == 0 {
                     let recieving_monkey_index = monkeys[monkey_index].test_true_monkey;
