@@ -1,5 +1,3 @@
-use std::iter;
-
 pub fn get_first_and_last_int(line: &str, accept_word_numbers: bool) -> (i32, i32) {
     let mut numbers: Vec<i32> = vec![];
 
