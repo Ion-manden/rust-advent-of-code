@@ -4,6 +4,7 @@ pub mod day_3;
 pub mod day_4;
 pub mod day_5;
 pub mod day_6;
+pub mod day_7;
 
 pub fn solve() {
     day_1::part_1::solve(include_str!("day_1/input.txt"));
@@ -18,4 +19,6 @@ pub fn solve() {
     day_5::part_2::solve(include_str!("day_5/input.txt"));
     day_6::part_1::solve(include_str!("day_6/input.txt"));
     day_6::part_2::solve(include_str!("day_6/input.txt"));
+    day_7::part_1::solve(include_str!("day_7/input.txt"));
+    day_7::part_2::solve(include_str!("day_7/input.txt"));
 }
