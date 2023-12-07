@@ -48,6 +48,6 @@ mod tests {
         let input = include_str!("./input.txt");
         let result = solve(input);
 
-        assert_eq!(result, 5329815);
+        assert_eq!(result, 255632664);
     }
 }

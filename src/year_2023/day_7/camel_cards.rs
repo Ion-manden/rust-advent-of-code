@@ -113,47 +113,64 @@ impl Hand {
     }
 
     pub fn get_stregth(self: &Self) -> i32 {
+        let all_card_counts = self.cards.iter().counts_by(|c| c);
+        let mut not_joker_card_counts = all_card_counts.clone();
+        not_joker_card_counts.remove(&Card::Joker);
+        let joker_count: &usize = all_card_counts.get(&Card::Joker).unwrap_or(&0);
+
         // Five of a kind
-        if self.cards.iter().all_equal() {
+        if not_joker_card_counts.values().max().unwrap_or(&0) + joker_count == 5 {
             return 7;
         }
 
         // Four of a kind
-        let sorted = self.cards.iter().sorted();
-        if sorted.clone().skip(1).all_equal() || sorted.clone().take(4).all_equal() {
+        if not_joker_card_counts.values().max().unwrap() + joker_count == 4 {
             return 6;
         }
 
         // Full house, where three cards have the same label, and the remaining two cards share a different label: 23332
-        let card_counts = sorted.clone().counts_by(|c| c);
-        let card_count_values = card_counts.values();
-        if card_count_values
-            .clone()
+        // There should not ever be more than one joker and two of each for a full house, more
+        // jokers or any other config would give a better hand
+        if (not_joker_card_counts
+            .values()
             .filter(|count| count == &&3)
             .count()
             == 1
-            && card_count_values
-                .clone()
+            && not_joker_card_counts
+                .values()
                 .filter(|count| count == &&2)
                 .count()
-                == 1
+                == 1)
+            || (joker_count == &1
+                && not_joker_card_counts
+                    .values()
+                    .filter(|count| count == &&2)
+                    .count()
+                    == 2)
         {
             return 5;
         }
 
         // Three of a kind
-        if card_count_values
-            .clone()
+        if not_joker_card_counts
+            .values()
             .filter(|count| count == &&3)
             .count()
             == 1
+            || (not_joker_card_counts
+                .values()
+                .filter(|count| count == &&2)
+                .count()
+                == 1
+                && joker_count == &1)
+            || (not_joker_card_counts.values().all_equal() && joker_count == &2)
         {
             return 4;
         }
 
         // Two pair
-        if card_count_values
-            .clone()
+        if not_joker_card_counts
+            .values()
             .filter(|count| count == &&2)
             .count()
             == 2
@@ -162,11 +179,12 @@ impl Hand {
         }
 
         // One pair
-        if card_count_values
-            .clone()
+        if not_joker_card_counts
+            .values()
             .filter(|count| count == &&2)
             .count()
             == 1
+            || (not_joker_card_counts.values().all_equal() && joker_count == &1)
         {
             return 2;
         }
