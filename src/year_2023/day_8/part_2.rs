@@ -1,11 +1,11 @@
-use super::navigation::{Direction, Network};
-use indicatif::{ProgressBar, ProgressStyle};
-use std::time::Duration;
+use num::integer::lcm;
 
-pub fn solve(input: &str) -> i32 {
+use super::navigation::{Direction, Network};
+
+pub fn solve(input: &str) -> usize {
     let network = Network::from(input);
 
-    let mut current_positions: Vec<String> = network
+    let current_positions: Vec<String> = network
         .map
         .keys()
         .filter(|head| head.ends_with("A"))
@@ -13,33 +13,30 @@ pub fn solve(input: &str) -> i32 {
         .collect();
     let is_goal_position = |pos: &String| pos.ends_with("Z");
 
-    let mut steps_taken = 0;
+    let steps_required: Vec<usize> = current_positions
+        .into_iter()
+        .map(|current_position| {
+            let mut current_position = current_position;
+            let mut steps_taken = 0;
+            for direction in network.directions.iter().cycle() {
+                if is_goal_position(&current_position) {
+                    break;
+                }
 
-    let pb = ProgressBar::new_spinner();
-    pb.enable_steady_tick(Duration::from_millis(120));
-    pb.set_style(
-        ProgressStyle::default_bar()
-            .template("[{elapsed_precise}] {per_sec}")
-            .unwrap(),
-    );
+                current_position = match direction {
+                    Direction::Left => network.map.get(&current_position).unwrap().0.clone(),
+                    Direction::Right => network.map.get(&current_position).unwrap().1.clone(),
+                };
 
-    for direction in network.directions.iter().cycle() {
-        pb.inc(1);
-        if current_positions.iter().all(is_goal_position) {
-            break;
-        }
+                steps_taken += 1;
+            }
 
-        current_positions = current_positions
-            .into_iter()
-            .map(|current_position| match direction {
-                Direction::Left => network.map.get(&current_position).unwrap().0.clone(),
-                Direction::Right => network.map.get(&current_position).unwrap().1.clone(),
-            })
-            .collect();
-        steps_taken += 1;
-    }
+            steps_taken
+        })
+        .collect();
 
-    steps_taken
+
+    steps_required.iter().fold(1, |acc, &x| lcm(acc, x))
 }
 
 #[cfg(test)]
@@ -59,6 +56,6 @@ mod tests {
         let input = include_str!("./input.txt");
         let result = solve(input);
 
-        assert_eq!(result, 5329815);
+        assert_eq!(result, 17972669116327);
     }
 }
