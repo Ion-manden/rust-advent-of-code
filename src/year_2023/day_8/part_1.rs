@@ -44,6 +44,6 @@ mod tests {
         let input = include_str!("./input.txt");
         let result = solve(input);
 
-        assert_eq!(result, 21105);
+        assert_eq!(result, 18673);
     }
 }
