@@ -3,7 +3,7 @@ use itertools::Itertools;
 use crate::libs::matrix::{Matrix, Point};
 
 pub fn solve(input: &str) -> i32 {
-    let symbols = vec!["$", "%", "/", "*", "&", "#", "+", "-", "@", "="];
+    let symbols = vec!['$', '%', '/', '*', '&', '#', '+', '-', '@', '='];
 
     let engine_schematics = Matrix::from(input);
 
@@ -13,7 +13,7 @@ pub fn solve(input: &str) -> i32 {
 
     for (y, line) in engine_schematics.values.iter().enumerate() {
         for (x, val) in line.iter().enumerate() {
-            if val.parse::<i32>().is_ok() {
+            if val.to_string().parse::<i32>().is_ok() {
                 partial_number_points.push(Point {
                     value: val.to_owned(),
                     x_coord: x,
@@ -35,7 +35,7 @@ pub fn solve(input: &str) -> i32 {
                 engine_schematics
                     .get_surrounding_points(point.x_coord, point.y_coord)
                     .iter()
-                    .find(|point| symbols.contains(&point.value.as_str()))
+                    .find(|point| symbols.contains(&point.value))
                     .is_some()
             })
         })

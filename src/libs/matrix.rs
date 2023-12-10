@@ -2,21 +2,21 @@ use std::ops::Add;
 
 #[derive(Clone, Debug)]
 pub struct Matrix {
-    pub values: Vec<Vec<String>>,
+    pub values: Vec<Vec<char>>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Point {
-    pub value: String,
+    pub value: char,
     pub x_coord: usize,
     pub y_coord: usize,
 }
 
 impl From<&str> for Matrix {
     fn from(value: &str) -> Self {
-        let values: Vec<Vec<String>> = value
+        let values: Vec<Vec<char>> = value
             .lines()
-            .map(|line| line.chars().map(|c| c.to_string()).collect())
+            .map(|line| line.chars().map(|c| c).collect())
             .collect();
 
         Self { values }
@@ -24,7 +24,7 @@ impl From<&str> for Matrix {
 }
 
 impl Matrix {
-    pub fn find(self: &Self, x_coord: usize, y_coord: usize) -> Option<&String> {
+    pub fn find(self: &Self, x_coord: usize, y_coord: usize) -> Option<&char> {
         self.values.iter().nth(y_coord)?.iter().nth(x_coord)
     }
 
@@ -66,9 +66,9 @@ daw"#;
         assert_eq!(
             matrix.values,
             vec![
-                vec!["v", "s", "1"],
-                vec!["s", "t", "p"],
-                vec!["d", "a", "w"]
+                vec!['v', 's', '1'],
+                vec!['s', 't', 'p'],
+                vec!['d', 'a', 'w']
             ]
         );
     }
@@ -84,42 +84,42 @@ daw"#;
 
         let mut expected = vec![
             Point {
-                value: "v".to_owned(),
+                value: 'v',
                 x_coord: 0,
                 y_coord: 0,
             },
             Point {
-                value: "s".to_owned(),
+                value: 's',
                 x_coord: 1,
                 y_coord: 0,
             },
             Point {
-                value: "1".to_owned(),
+                value: '1',
                 x_coord: 2,
                 y_coord: 0,
             },
             Point {
-                value: "s".to_owned(),
+                value: 's',
                 x_coord: 0,
                 y_coord: 1,
             },
             Point {
-                value: "p".to_owned(),
+                value: 'p',
                 x_coord: 2,
                 y_coord: 1,
             },
             Point {
-                value: "d".to_owned(),
+                value: 'd',
                 x_coord: 0,
                 y_coord: 2,
             },
             Point {
-                value: "a".to_owned(),
+                value: 'a',
                 x_coord: 1,
                 y_coord: 2,
             },
             Point {
-                value: "w".to_owned(),
+                value: 'w',
                 x_coord: 2,
                 y_coord: 2,
             },

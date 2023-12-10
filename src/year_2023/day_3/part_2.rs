@@ -13,7 +13,7 @@ pub fn solve(input: &str) -> i32 {
 
     for (y, line) in engine_schematics.values.iter().enumerate() {
         for (x, val) in line.iter().enumerate() {
-            if val == "*" {
+            if val == &'*' {
                 stars.push(Point {
                     value: val.to_owned(),
                     x_coord: x,
@@ -21,7 +21,7 @@ pub fn solve(input: &str) -> i32 {
                 });
             }
 
-            if val.parse::<i32>().is_ok() {
+            if val.to_string().parse::<i32>().is_ok() {
                 partial_number_points.push(Point {
                     value: val.to_owned(),
                     x_coord: x,
