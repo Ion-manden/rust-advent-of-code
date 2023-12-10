@@ -24,8 +24,30 @@ impl From<&str> for Matrix {
 }
 
 impl Matrix {
-    pub fn find(self: &Self, x_coord: usize, y_coord: usize) -> Option<&char> {
+    pub fn get_width(self: &Self) -> usize {
+        self.values.first().unwrap().len()
+    }
+    pub fn get_height(self: &Self) -> usize {
+        self.values.len()
+    }
+
+    pub fn get(self: &Self, x_coord: usize, y_coord: usize) -> Option<&char> {
         self.values.iter().nth(y_coord)?.iter().nth(x_coord)
+    }
+    pub fn find(self: &Self, value: &char) -> Option<Point> {
+        for (y, line) in self.values.iter().enumerate() {
+            for (x, char) in line.iter().enumerate() {
+                if char == value {
+                    return Some(Point {
+                        value: char.to_owned(),
+                        x_coord: x,
+                        y_coord: y,
+                    })
+                }
+            }
+        }
+
+        None
     }
 
     pub fn get_surrounding_points(self: &Self, x_coord: usize, y_coord: usize) -> Vec<Point> {
@@ -37,7 +59,7 @@ impl Matrix {
                     continue;
                 }
 
-                let point_val = self.find(x, y);
+                let point_val = self.get(x, y);
                 if point_val.is_some() {
                     points.push(Point {
                         value: point_val.unwrap().to_owned(),
@@ -127,6 +149,6 @@ daw"#;
 
         expected.sort();
 
-        assert_eq!(points,expected);
+        assert_eq!(points, expected);
     }
 }
