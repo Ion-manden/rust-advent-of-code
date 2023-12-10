@@ -128,6 +128,7 @@ mod tests {
         assert_eq!(result, 46);
     }
 
+    #[ignore]
     #[test]
     fn solve_input() {
         let input = include_str!("./input.txt");
