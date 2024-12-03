@@ -1,4 +1,3 @@
-use itertools::Itertools;
 use regex::Regex;
 
 pub fn solve(input: &str) -> i32 {
