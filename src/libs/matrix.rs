@@ -1,5 +1,7 @@
 use std::ops::Add;
 
+use itertools::Diff;
+
 #[derive(Clone, Debug)]
 pub struct Matrix {
     pub values: Vec<Vec<char>>,
@@ -10,6 +12,17 @@ pub struct Point {
     pub value: char,
     pub x_coord: usize,
     pub y_coord: usize,
+}
+
+impl Point {
+    // Returns the position difference between root and provided point.
+    // Returned value is (difference on x cord, difference on y cord)
+    pub fn diff(self: &Self, point: &Point) -> (i32, i32) {
+        (
+            point.x_coord as i32 - self.x_coord as i32,
+            point.y_coord as i32 - self.y_coord as i32,
+        )
+    }
 }
 
 impl From<&str> for Matrix {
@@ -34,6 +47,7 @@ impl Matrix {
     pub fn get(self: &Self, x_coord: usize, y_coord: usize) -> Option<&char> {
         self.values.iter().nth(y_coord)?.iter().nth(x_coord)
     }
+
     pub fn find(self: &Self, value: &char) -> Option<Point> {
         for (y, line) in self.values.iter().enumerate() {
             for (x, char) in line.iter().enumerate() {
@@ -42,12 +56,29 @@ impl Matrix {
                         value: char.to_owned(),
                         x_coord: x,
                         y_coord: y,
-                    })
+                    });
                 }
             }
         }
 
         None
+    }
+
+    pub fn find_all(self: &Self, value: &char) -> Vec<Point> {
+        let mut points: Vec<Point> = vec![];
+        for (y, line) in self.values.iter().enumerate() {
+            for (x, char) in line.iter().enumerate() {
+                if char == value {
+                    points.push(Point {
+                        value: char.to_owned(),
+                        x_coord: x,
+                        y_coord: y,
+                    })
+                }
+            }
+        }
+
+        points
     }
 
     pub fn get_surrounding_points(self: &Self, x_coord: usize, y_coord: usize) -> Vec<Point> {
