@@ -1,7 +1,5 @@
 use std::ops::Add;
 
-use itertools::Diff;
-
 #[derive(Clone, Debug)]
 pub struct Matrix {
     pub values: Vec<Vec<char>>,
@@ -37,6 +35,16 @@ impl From<&str> for Matrix {
 }
 
 impl Matrix {
+    pub fn print(self: &Self) {
+        for line in self.values.clone() {
+            let line_string = line.iter().fold(String::from(""), |mut line, c| {
+                line.push(*c);
+                return line;
+            });
+            println!("{}", line_string);
+        }
+    }
+
     pub fn get_width(self: &Self) -> usize {
         self.values.first().unwrap().len()
     }
@@ -48,10 +56,39 @@ impl Matrix {
         self.values.iter().nth(y_coord)?.iter().nth(x_coord)
     }
 
+    pub fn set(&mut self, point: &Point) -> Result<(), String> {
+        let current_value = self
+            .values
+            .get_mut(point.y_coord)
+            .ok_or("out of bounds")?
+            .get_mut(point.x_coord)
+            .ok_or("out of bounds")?;
+
+        *current_value = point.value;
+
+        Ok(())
+    }
+
     pub fn find(self: &Self, value: &char) -> Option<Point> {
         for (y, line) in self.values.iter().enumerate() {
             for (x, char) in line.iter().enumerate() {
                 if char == value {
+                    return Some(Point {
+                        value: char.to_owned(),
+                        x_coord: x,
+                        y_coord: y,
+                    });
+                }
+            }
+        }
+
+        None
+    }
+
+    pub fn find_one_of(self: &Self, values: &Vec<char>) -> Option<Point> {
+        for (y, line) in self.values.iter().enumerate() {
+            for (x, char) in line.iter().enumerate() {
+                if values.contains(char) {
                     return Some(Point {
                         value: char.to_owned(),
                         x_coord: x,
